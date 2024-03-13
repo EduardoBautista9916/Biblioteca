@@ -7,6 +7,9 @@ import com.Model.*;
 
 public class main {
     public static void main(String[] args) {
-        ConWelcome window = new ConWelcome();
+        ConWelcome window;
+        window = new ConWelcome();
+
+        
     }
 }

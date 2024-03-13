@@ -17,15 +17,14 @@ public class ConWelcome {
             window.getBtnStart().addActionListener(new actionBtnStart());
             window.setVisible(true);
         }
-
+        
         private class actionBtnStart implements ActionListener {
 
             @Override
             public void actionPerformed(ActionEvent eventStart) {
                 language.setSelectLanguage(language.getAvaibleLanguages()[window.getCbxLanguages().getSelectedIndex()]);
                 System.out.println(language.getSelectLanguage()); 
+                window.dispose();
             }
-        
-            
         }
 }
