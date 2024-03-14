@@ -11,7 +11,6 @@ public class Languages {
 
     public Languages(){
         availableLanguages = new String[][] {
-            {"English", "en_EN"},
             {"Spanish", "es_ES"},
             {"Italian", "it_IT"},
             {"French", "fr_FR"},

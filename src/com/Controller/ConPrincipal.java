@@ -19,15 +19,24 @@ public class ConPrincipal{
     private StringBuilder jsonObtained;
     private JSONArray jsonArray;
     private JSONObject jsonObject;
+    private int nBook;
+    private int nMaxBook;
 
     public ConPrincipal(Languages language){
         this.language = language;
+        nBook=0;
+        nMaxBook = 0;
         window = new Win_Principal();
         window.getBtnObtain().addActionListener(new actionBtnObtainBooks());
         window.getBtnAddress().addActionListener(new actionBtnObtainAddress());
         window.getBtnComments().addActionListener(new actionBtnObtainComments());
         window.getBtnNext().addActionListener(new actionBtnNext());
         window.getBtnPrevious().addActionListener(new actionBtnPrevious());
+
+        window.getBtnAddress().setEnabled(false);
+        window.getBtnComments().setEnabled(false);
+        window.getBtnNext().setEnabled(false);
+        window.getBtnPrevious().setEnabled(false);
 
         window.setVisible(true);
     }
@@ -36,6 +45,7 @@ public class ConPrincipal{
         @Override
             public void actionPerformed(ActionEvent eventStart) {
                 // Actions for Button
+                nMaxBook = ((Number) window.getSpnNumBooks().getValue() ).intValue() -1;
                 ObtainInformation conn = new ObtainInformation();
                 conn.setApi("books");
                 conn.setLocale(language.getSelectLanguage());
@@ -45,7 +55,7 @@ public class ConPrincipal{
                 jsonObtained = conn.getJsonObtained();
 
                 jsonArray = new JSONArray(transformArray(jsonObtained.toString()));
-                jsonObject = jsonArray.getJSONObject(0);
+                jsonObject = jsonArray.getJSONObject(nBook);
 
                 window.getTxtTitleBook().setText(jsonObject.getString("title"));
                 window.getTxtAuthor().setText(jsonObject.getString("author"));
@@ -54,6 +64,11 @@ public class ConPrincipal{
                 window.getTxtPublished().setText(jsonObject.getString("published"));
                 window.getTxtPublisher().setText(jsonObject.getString("publisher"));
                 window.getTxtGenre().setText(jsonObject.getString("genre"));
+
+                window.getBtnAddress().setEnabled(true);
+                window.getBtnComments().setEnabled(true);
+                window.getBtnNext().setEnabled(true);
+
             }
     }
 
@@ -88,7 +103,30 @@ public class ConPrincipal{
     private class actionBtnNext implements ActionListener {
         @Override
             public void actionPerformed(ActionEvent eventStart) {
-                // Actions for Button
+                nBook = nBook +1;
+                jsonObject = jsonArray.getJSONObject(nBook);
+
+                window.getTxtTitleBook().setText(jsonObject.getString("title"));
+                window.getTxtAuthor().setText(jsonObject.getString("author"));
+                window.getTxtDescription().setText(jsonObject.getString("description"));
+                window.getTxtIsbn().setText(jsonObject.getString("isbn"));
+                window.getTxtPublished().setText(jsonObject.getString("published"));
+                window.getTxtPublisher().setText(jsonObject.getString("publisher"));
+                window.getTxtGenre().setText(jsonObject.getString("genre"));
+
+                window.getBtnAddress().setEnabled(true);
+                window.getBtnComments().setEnabled(true);
+                window.getBtnNext().setEnabled(true);
+                System.out.println("NBOOK");
+                System.out.println(nBook);
+                System.out.println("Max");
+                System.out.println(nMaxBook);
+                if(nBook > 0){
+                    window.getBtnPrevious().setEnabled(true);
+                }
+                if(nBook == nMaxBook){
+                    window.getBtnNext().setEnabled(false);
+                }
             }
     }
 
@@ -96,6 +134,30 @@ public class ConPrincipal{
         @Override
             public void actionPerformed(ActionEvent eventStart) {
                 // Actions for Button
+                nBook = nBook -1;
+                jsonObject = jsonArray.getJSONObject(nBook);
+
+                window.getTxtTitleBook().setText(jsonObject.getString("title"));
+                window.getTxtAuthor().setText(jsonObject.getString("author"));
+                window.getTxtDescription().setText(jsonObject.getString("description"));
+                window.getTxtIsbn().setText(jsonObject.getString("isbn"));
+                window.getTxtPublished().setText(jsonObject.getString("published"));
+                window.getTxtPublisher().setText(jsonObject.getString("publisher"));
+                window.getTxtGenre().setText(jsonObject.getString("genre"));
+
+                window.getBtnAddress().setEnabled(true);
+                window.getBtnComments().setEnabled(true);
+                window.getBtnNext().setEnabled(true);
+                System.out.println("NBOOK");
+                System.out.println(nBook);
+                System.out.println("Max");
+                System.out.println(nMaxBook);
+                if(nBook == 0){
+                    window.getBtnPrevious().setEnabled(false);
+                }
+                if(nBook < nMaxBook){
+                    window.getBtnNext().setEnabled(true);
+                }
             }
     }
 
