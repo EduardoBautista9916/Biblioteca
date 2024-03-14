@@ -23,6 +23,8 @@ public class Languages {
             {"Polish", "pl_PL"}
         };
 
+        selectLanguage = availableLanguages[0];
+
     }
 
     // Setters and Getters

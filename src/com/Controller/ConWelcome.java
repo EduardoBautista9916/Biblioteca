@@ -7,9 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ConWelcome {
+        private Win_Welcome window;
+        private ConPrincipal windowPri;
         private Languages language;
-        Win_Welcome window;
-        
 
         public ConWelcome(){
             language = new Languages();
@@ -25,6 +25,7 @@ public class ConWelcome {
                 language.setSelectLanguage(language.getAvaibleLanguages()[window.getCbxLanguages().getSelectedIndex()]);
                 System.out.println(language.getSelectLanguage()); 
                 window.dispose();
+                windowPri = new ConPrincipal(language);
             }
         }
 }

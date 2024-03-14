@@ -9,19 +9,11 @@ public class ObtainInformation {
     static private String linkApi;
     static private HttpURLConnection conn;
     static private int responseCode;
-    static String api;
-    static String seed;
-    static String quantity;
-    static String locale;
-
-
-    public static void main(String[] args) {
-        api = "books";
-        seed="123";
-        quantity = "10";
-        locale = "es_ES";
-        conection();
-    }
+    static private StringBuilder jsonObtained;
+    static private String api;
+    static private String seed;
+    static private String quantity;
+    static private String locale;
 
     public static void conection(){
         
@@ -52,21 +44,107 @@ public class ObtainInformation {
             if(responseCode != 200){
                 throw new RuntimeException("Ocurrio un Error" + responseCode);
             } else{
-                StringBuilder informationString = new StringBuilder();
+                jsonObtained = new StringBuilder();
                 Scanner scanner = new Scanner(url.openStream());
 
                 while (scanner.hasNext()) {
-                    informationString.append(scanner.nextLine());
+                    jsonObtained.append(scanner.nextLine());
                 }
 
                 scanner.close();
 
-                System.out.println(informationString);
+                //System.out.println(jsonObtained);
 
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void connection(String apiN, String seedN, String quantityN, String localeN){
+        switch (apiN) {
+            case "books":
+                linkApi = "https://fakerapi.it/api/v1/"+apiN+"?_seed="+seedN+"&_locale="+localeN+"&_quantity="+quantityN;
+                break;
+            case "addresses":
+                linkApi = "https://fakerapi.it/api/v1/"+apiN+"?_seed="+seedN+"&_locale="+localeN+"&_quantity="+quantityN;
+                break;
+            case "texts":
+                linkApi = "https://fakerapi.it/api/v1/"+apiN+"?_characters=500&_seed="+seedN+"&_locale="+localeN+"&_quantity="+quantityN;
+                break;
+            default:
+                break;
+        }
+
+        
+        
+        try {
+            url = new URL(linkApi);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+
+            responseCode = conn.getResponseCode();
+
+            if(responseCode != 200){
+                throw new RuntimeException("Ocurrio un Error" + responseCode);
+            } else{
+                jsonObtained = new StringBuilder();
+                Scanner scanner = new Scanner(url.openStream());
+
+                while (scanner.hasNext()) {
+                    jsonObtained.append(scanner.nextLine());
+                }
+
+                scanner.close();
+
+                //System.out.println(jsonObtained);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setApi(String api){
+        this.api = api;
+    }
+
+    public String getApi(){
+        return api;
+    }
+
+    public void setSeed(String seed){
+        this.seed = seed;
+    }
+
+    public String getSeed(){
+        return seed;
+    }
+
+    public void setQuantity(String quantity){
+        this.quantity = quantity;
+    }
+
+    public String getQuantity(){
+        return quantity;
+    }
+
+    public void setLocale(String locale){
+        this.locale = locale;
+    }
+
+    public String getLocale(){
+        return locale;
+    }
+
+    public void setJsonObtained(StringBuilder jsonObtained){
+        this.jsonObtained = jsonObtained;
+    }
+
+    public StringBuilder getJsonObtained(){
+        return jsonObtained;
     }
 }

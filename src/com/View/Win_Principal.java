@@ -49,9 +49,9 @@ public class Win_Principal extends JFrame{
     public Win_Principal(){
         super("Principal");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(new Dimension(800,500));
-        setMinimumSize(new Dimension(800,500));
-        setMaximumSize(new Dimension(800,500));
+        setSize(new Dimension(830,500));
+        setMinimumSize(new Dimension(830,500));
+        setMaximumSize(new Dimension(830,500));
 
         initComponents();
     }
@@ -87,7 +87,7 @@ public class Win_Principal extends JFrame{
 
         lblIsbn = new JLabel();
         lblIsbn.setFont(new Font("Century Gothic", 1, 12));
-        lblIsbn.setText("Genre of Book:");
+        lblIsbn.setText("ISBN:");
 
         txtIsbn = new JTextField();
         txtIsbn.setFont(new Font("Century Gothic", 1, 12));
@@ -101,14 +101,14 @@ public class Win_Principal extends JFrame{
 
         lblPublished = new JLabel();
         lblPublished.setFont(new Font("Century Gothic", 1, 12));
-        lblPublished.setText("Genre of Book:");
+        lblPublished.setText("Published:");
 
         txtPublished = new JTextField();
         txtPublished.setFont(new Font("Century Gothic", 1, 12));
 
         lblPublisher = new JLabel();
         lblPublisher.setFont(new Font("Century Gothic", 1, 12));
-        lblPublisher.setText("Genre of Book:");
+        lblPublisher.setText("Publisher:");
 
         txtPublisher = new JTextField();
         txtPublisher.setFont(new Font("Century Gothic", 1, 12));
@@ -326,17 +326,15 @@ public class Win_Principal extends JFrame{
         return btnAddress;
     }
 
+    public JButton getBtnComments(){
+        return btnComments;
+    }
+
     public JButton getBtnNext(){
         return btnNext;
     }
 
     public JButton getBtnPrevious(){
         return btnPrevious;
-    }
-
-
-    public static void main(String[] args) {
-        Win_Principal win = new Win_Principal();
-        win.setVisible(true);
     }
 }
