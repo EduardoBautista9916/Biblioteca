@@ -24,14 +24,15 @@ public class ObtainInformation {
             case "addresses":
                 linkApi = "https://fakerapi.it/api/v1/"+api+"?_seed="+seed+"&_locale="+locale+"&_quantity="+quantity;
                 break;
-            case "texts":
-                linkApi = "https://fakerapi.it/api/v1/"+api+"?_characters=500&_seed="+seed+"&_locale="+locale+"&_quantity="+quantity;
+            case "custom":
+                linkApi = "https://fakerapi.it/api/v1/"+api+"?author=name&email=email&comment=longText&_locale="+locale+"&_quantity="+quantity;
                 break;
             default:
+                linkApi = "https://fakerapi.it/api/v1/";
                 break;
         }
 
-        
+        System.out.println(linkApi);
         
         try {
             url = new URL(linkApi);
@@ -42,7 +43,7 @@ public class ObtainInformation {
             responseCode = conn.getResponseCode();
 
             if(responseCode != 200){
-                throw new RuntimeException("Ocurrio un Error" + responseCode);
+                throw new RuntimeException("Ocurrio un Error " + responseCode);
             } else{
                 jsonObtained = new StringBuilder();
                 Scanner scanner = new Scanner(url.openStream());
@@ -52,8 +53,6 @@ public class ObtainInformation {
                 }
 
                 scanner.close();
-
-                //System.out.println(jsonObtained);
 
             }
 
@@ -70,14 +69,12 @@ public class ObtainInformation {
             case "addresses":
                 linkApi = "https://fakerapi.it/api/v1/"+apiN+"?_seed="+seedN+"&_locale="+localeN+"&_quantity="+quantityN;
                 break;
-            case "texts":
-                linkApi = "https://fakerapi.it/api/v1/"+apiN+"?_characters=500&_seed="+seedN+"&_locale="+localeN+"&_quantity="+quantityN;
+            case "custom":
+                linkApi = "https://fakerapi.it/api/v1/"+api+"?author=name&email=email&comment=longText&_locale="+locale+"&_quantity="+quantity;
                 break;
             default:
                 break;
-        }
-
-        
+        }       
         
         try {
             url = new URL(linkApi);
@@ -88,7 +85,7 @@ public class ObtainInformation {
             responseCode = conn.getResponseCode();
 
             if(responseCode != 200){
-                throw new RuntimeException("Ocurrio un Error" + responseCode);
+                throw new RuntimeException("Ocurrio un Error " + responseCode);
             } else{
                 jsonObtained = new StringBuilder();
                 Scanner scanner = new Scanner(url.openStream());
@@ -98,9 +95,6 @@ public class ObtainInformation {
                 }
 
                 scanner.close();
-
-                //System.out.println(jsonObtained);
-
             }
 
         } catch (Exception e) {
